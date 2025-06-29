@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Immigrant Shield - Critical Support & Resources</title>
+    <title>Immigrant Shield - Multilingual Support & Resources</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -498,6 +498,34 @@
             color: var(--crisis-blue);
         }
         
+        /* Language Notification */
+        .language-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.95);
+            border-radius: 50px;
+            padding: 12px 25px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .language-notification.show {
+            opacity: 1;
+        }
+        
+        .language-notification .flag {
+            width: 24px;
+            height: 18px;
+            border-radius: 2px;
+        }
+        
         /* Footer */
         footer {
             background: var(--crisis-blue);
@@ -700,6 +728,12 @@
                 right: 20px;
                 max-width: none;
             }
+            
+            .language-notification {
+                width: 90%;
+                text-align: center;
+                border-radius: 10px;
+            }
         }
     </style>
 </head>
@@ -707,13 +741,13 @@
     <!-- Accessibility Bar -->
     <div class="accessibility-bar">
         <button class="accessibility-btn" id="contrast-toggle">
-            <i class="fas fa-adjust"></i> High Contrast
+            <i class="fas fa-adjust"></i> <span data-i18n="high_contrast">High Contrast</span>
         </button>
         <button class="accessibility-btn" id="font-increase">
-            <i class="fas fa-text-height"></i> Increase Font
+            <i class="fas fa-text-height"></i> <span data-i18n="increase_font">Increase Font</span>
         </button>
         <button class="accessibility-btn" id="animation-toggle">
-            <i class="fas fa-running"></i> Reduce Motion
+            <i class="fas fa-running"></i> <span data-i18n="reduce_motion">Reduce Motion</span>
         </button>
     </div>
     
@@ -730,18 +764,22 @@
             <div class="nav-container">
                 <div class="search-container">
                     <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="search-bar" placeholder="Find critical resources...">
+                    <input type="text" class="search-bar" placeholder="Find critical resources..." data-i18n-placeholder="search_placeholder">
                 </div>
                 
                 <div class="language-switcher">
                     <button class="language-btn">
                         <i class="fas fa-globe"></i>
-                        English
+                        <span id="current-lang">English</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="language-dropdown" id="language-dropdown">
+                        <div class="language-option" data-lang="en">
+                            <div class="language-flag" style="background: linear-gradient(to bottom, #b22234, #3c3b6e);"></div>
+                            English
+                        </div>
                         <div class="language-option" data-lang="es">
-                            <div class="language-flag" style="background: #ffce00; border: 2px solid #c60b1e;"></div>
+                            <div class="language-flag" style="background: linear-gradient(to right, #aa151b 25%, #f1bf00 25%, #f1bf00 75%, #aa151b 75%);"></div>
                             Español
                         </div>
                         <div class="language-option" data-lang="zh">
@@ -749,7 +787,7 @@
                             中文 (Mandarin)
                         </div>
                         <div class="language-option" data-lang="ar">
-                            <div class="language-flag" style="background: #ce1126;"></div>
+                            <div class="language-flag" style="background: linear-gradient(to bottom, #ce1126, #000, #fff, #007a3d);"></div>
                             العربية (Arabic)
                         </div>
                         <div class="language-option" data-lang="hi">
@@ -757,15 +795,15 @@
                             हिन्दी (Hindi)
                         </div>
                         <div class="language-option" data-lang="ru">
-                            <div class="language-flag" style="background: #d52b1e;"></div>
+                            <div class="language-flag" style="background: linear-gradient(to bottom, #fff, #0039a6, #d52b1e);"></div>
                             Русский (Russian)
                         </div>
                         <div class="language-option" data-lang="pt">
-                            <div class="language-flag" style="background: #009c3b;"></div>
+                            <div class="language-flag" style="background: linear-gradient(to bottom, #009c3b, #ffdf00, #002776);"></div>
                             Português (Portuguese)
                         </div>
                         <div class="language-option" data-lang="bn">
-                            <div class="language-flag" style="background: #006a4e;"></div>
+                            <div class="language-flag" style="background: linear-gradient(to bottom, #006a4e, #f42a41);"></div>
                             বাংলা (Bengali)
                         </div>
                     </div>
@@ -777,17 +815,17 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">Face Immigration Law Enforcement with Confidence</h1>
-            <h2 class="hero-subtitle">Immediate Survival Tools for Critical Situations</h2>
-            <p class="hero-description">Free, actionable resources available in multiple languages to protect you and your family. Know your rights, prepare for emergencies, and access legal support.</p>
-            <a href="#crisis-zone" class="hero-cta pulse">Access Critical Resources Now</a>
+            <h1 class="hero-title" data-i18n="hero_title">Face Immigration Law Enforcement with Confidence</h1>
+            <h2 class="hero-subtitle" data-i18n="hero_subtitle">Immediate Survival Tools for Critical Situations</h2>
+            <p class="hero-description" data-i18n="hero_description">Free, actionable resources available in multiple languages to protect you and your family. Know your rights, prepare for emergencies, and access legal support.</p>
+            <a href="#crisis-zone" class="hero-cta pulse" data-i18n="hero_cta">Access Critical Resources Now</a>
         </div>
     </section>
     
     <!-- Crisis Zone -->
     <section class="zone crisis-zone" id="crisis-zone">
-        <h2 class="section-title">Crisis Zone: Immediate Actions</h2>
-        <p class="section-subtitle" style="text-align: center; color: rgba(255,255,255,0.9); max-width: 800px; margin: 0 auto 40px;">
+        <h2 class="section-title" data-i18n="crisis_title">Crisis Zone: Immediate Actions</h2>
+        <p class="section-subtitle" style="text-align: center; color: rgba(255,255,255,0.9); max-width: 800px; margin: 0 auto 40px;" data-i18n="crisis_subtitle">
             Time is critical. These tools are simple, practical, and designed to protect you right now. Available on any device, anywhere.
         </p>
         
@@ -798,9 +836,9 @@
                     <i class="fas fa-id-card"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">Know Your Rights Card</h3>
-                    <p class="card-description">Printable & mobile-friendly wallet-sized guide with exact phrases to use during ICE encounters. Available in 10+ languages.</p>
-                    <a href="https://www.ilrc.org/community-resources/know-your-rights" class="card-btn">Download Now</a>
+                    <h3 class="card-title" data-i18n="card1_title">Know Your Rights Card</h3>
+                    <p class="card-description" data-i18n="card1_desc">Printable & mobile-friendly wallet-sized guide with exact phrases to use during ICE encounters. Available in 10+ languages.</p>
+                    <a href="https://www.ilrc.org/community-resources/know-your-rights" class="card-btn" data-i18n="card1_btn">Download Now</a>
                 </div>
             </div>
             
@@ -810,9 +848,9 @@
                     <i class="fas fa-first-aid"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">ICE Raid Survival Kit</h3>
-                    <p class="card-description">5-minute checklist: secure documents, assign emergency contacts, prepare a go-bag. Includes raid hotspot map.</p>
-                    <a href="https://www.ilrc.org/sites/default/files/resources/imm_preparedness_kit_april2020_1.pdf" class="card-btn">Get the Kit</a>
+                    <h3 class="card-title" data-i18n="card2_title">ICE Raid Survival Kit</h3>
+                    <p class="card-description" data-i18n="card2_desc">5-minute checklist: secure documents, assign emergency contacts, prepare a go-bag. Includes raid hotspot map.</p>
+                    <a href="https://www.ilrc.org/sites/default/files/resources/imm_preparedness_kit_april2020_1.pdf" class="card-btn" data-i18n="card2_btn">Get the Kit</a>
                 </div>
             </div>
             
@@ -822,9 +860,9 @@
                     <i class="fas fa-gavel"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">Legal Aid Finder</h3>
-                    <p class="card-description">Enter your ZIP code for free or low-cost immigration lawyers near you. Updated weekly with availability.</p>
-                    <a href="https://www.immigrationadvocates.org/nonprofit/legaldirectory/" class="card-btn">Find Help</a>
+                    <h3 class="card-title" data-i18n="card3_title">Legal Aid Finder</h3>
+                    <p class="card-description" data-i18n="card3_desc">Enter your ZIP code for free or low-cost immigration lawyers near you. Updated weekly with availability.</p>
+                    <a href="https://www.immigrationadvocates.org/nonprofit/legaldirectory/" class="card-btn" data-i18n="card3_btn">Find Help</a>
                 </div>
             </div>
             
@@ -834,9 +872,9 @@
                     <i class="fas fa-phone-alt"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">Emergency Hotline Directory</h3>
-                    <p class="card-description">Nationwide numbers for legal aid, mental health support, and family reunification. Save these immediately.</p>
-                    <a href="https://www.immigrationadvocates.org/nonprofit/legaldirectory/" class="card-btn">See the List</a>
+                    <h3 class="card-title" data-i18n="card4_title">Emergency Hotline Directory</h3>
+                    <p class="card-description" data-i18n="card4_desc">Nationwide numbers for legal aid, mental health support, and family reunification. Save these immediately.</p>
+                    <a href="https://www.immigrationadvocates.org/nonprofit/legaldirectory/" class="card-btn" data-i18n="card4_btn">See the List</a>
                 </div>
             </div>
         </div>
@@ -844,8 +882,8 @@
     
     <!-- Preparation Zone -->
     <section class="zone prep-zone" id="prep-zone">
-        <h2 class="section-title">Preparation Zone: Build Your Safety Plan</h2>
-        <p class="section-subtitle" style="text-align: center; color: rgba(255,255,255,0.9); max-width: 800px; margin: 0 auto 40px;">
+        <h2 class="section-title" data-i18n="prep_title">Preparation Zone: Build Your Safety Plan</h2>
+        <p class="section-subtitle" style="text-align: center; color: rgba(255,255,255,0.9); max-width: 800px; margin: 0 auto 40px;" data-i18n="prep_subtitle">
             Proactive tools to prepare for potential challenges. Knowledge is your best protection.
         </p>
         
@@ -856,9 +894,9 @@
                     <i class="fas fa-file-alt"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">Essential USCIS Forms</h3>
-                    <p class="card-description">Access the latest USCIS forms including I-589 (Asylum), I-765 (Work Authorization), I-130 (Family Petitions).</p>
-                    <a href="https://www.uscis.gov/forms/forms" class="card-btn">View All Forms</a>
+                    <h3 class="card-title" data-i18n="prep_card1_title">Essential USCIS Forms</h3>
+                    <p class="card-description" data-i18n="prep_card1_desc">Access the latest USCIS forms including I-589 (Asylum), I-765 (Work Authorization), I-130 (Family Petitions).</p>
+                    <a href="https://www.uscis.gov/forms/forms" class="card-btn" data-i18n="prep_card1_btn">View All Forms</a>
                 </div>
             </div>
             
@@ -868,9 +906,9 @@
                     <i class="fas fa-passport"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">Document Safety System</h3>
-                    <p class="card-description">Create digital backups of essential documents and learn secure storage methods. Available in multiple languages.</p>
-                    <a href="https://www.ilrc.org/community-resources/know-your-rights" class="card-btn">Secure Documents</a>
+                    <h3 class="card-title" data-i18n="prep_card2_title">Document Safety System</h3>
+                    <p class="card-description" data-i18n="prep_card2_desc">Create digital backups of essential documents and learn secure storage methods. Available in multiple languages.</p>
+                    <a href="https://www.ilrc.org/community-resources/know-your-rights" class="card-btn" data-i18n="prep_card2_btn">Secure Documents</a>
                 </div>
             </div>
             
@@ -880,9 +918,9 @@
                     <i class="fas fa-book"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">Legal Guides & Resources</h3>
-                    <p class="card-description">Comprehensive guides to your rights in different immigration situations. Downloadable in 7 languages.</p>
-                    <a href="https://www.ilrc.org/community-resources" class="card-btn">Access Resources</a>
+                    <h3 class="card-title" data-i18n="prep_card3_title">Legal Guides & Resources</h3>
+                    <p class="card-description" data-i18n="prep_card3_desc">Comprehensive guides to your rights in different immigration situations. Downloadable in 7 languages.</p>
+                    <a href="https://www.ilrc.org/community-resources" class="card-btn" data-i18n="prep_card3_btn">Access Resources</a>
                 </div>
             </div>
             
@@ -892,17 +930,17 @@
                     <i class="fas fa-clipboard-list"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">Templates & Checklists</h3>
-                    <p class="card-description">Ready-to-use templates for FOIA requests, asylum statements, and family safety plans.</p>
-                    <a href="https://www.ilrc.org/community-resources" class="card-btn">Get Templates</a>
+                    <h3 class="card-title" data-i18n="prep_card4_title">Templates & Checklists</h3>
+                    <p class="card-description" data-i18n="prep_card4_desc">Ready-to-use templates for FOIA requests, asylum statements, and family safety plans.</p>
+                    <a href="https://www.ilrc.org/community-resources" class="card-btn" data-i18n="prep_card4_btn">Get Templates</a>
                 </div>
             </div>
         </div>
         
         <!-- Processing Times Visualization -->
         <div class="visualization-container">
-            <h3>USCIS Processing Times (2025)</h3>
-            <p>Current processing times for key immigration forms:</p>
+            <h3 data-i18n="processing_title">USCIS Processing Times (2025)</h3>
+            <p data-i18n="processing_desc">Current processing times for key immigration forms:</p>
             <div class="chart-container">
                 <canvas id="processingTimesChart"></canvas>
             </div>
@@ -911,32 +949,32 @@
     
     <!-- Community Zone -->
     <section class="zone community-zone" id="community-zone">
-        <h2 class="section-title">Community Zone: Support & Connection</h2>
-        <p class="section-subtitle" style="text-align: center; color: rgba(255,255,255,0.9); max-width: 800px; margin: 0 auto 40px;">
+        <h2 class="section-title" data-i18n="community_title">Community Zone: Support & Connection</h2>
+        <p class="section-subtitle" style="text-align: center; color: rgba(255,255,255,0.9); max-width: 800px; margin: 0 auto 40px;" data-i18n="community_subtitle">
             You're not alone. Connect with others, access mental health resources, and join our supportive community.
         </p>
         
         <div class="stats-container">
             <div class="stat-card">
                 <div class="stat-number">113,431</div>
-                <div class="stat-label">ICE Arrests in 2024</div>
+                <div class="stat-label" data-i18n="stat1">ICE Arrests in 2024</div>
             </div>
             
             <div class="stat-card">
                 <div class="stat-number">76%</div>
-                <div class="stat-label">Asylum Denial Rate</div>
+                <div class="stat-label" data-i18n="stat2">Asylum Denial Rate</div>
             </div>
             
             <div class="stat-card">
                 <div class="stat-number">3.58M</div>
-                <div class="stat-label">Pending Immigration Cases</div>
+                <div class="stat-label" data-i18n="stat3">Pending Immigration Cases</div>
             </div>
         </div>
         
         <!-- Asylum Approval Rates Visualization -->
         <div class="visualization-container">
-            <h3>Asylum Approval Rates by Country (2024)</h3>
-            <p>Success rates vary significantly based on country of origin:</p>
+            <h3 data-i18n="asylum_title">Asylum Approval Rates by Country (2024)</h3>
+            <p data-i18n="asylum_desc">Success rates vary significantly based on country of origin:</p>
             <div class="chart-container">
                 <canvas id="asylumChart"></canvas>
             </div>
@@ -944,32 +982,32 @@
         
         <!-- Wait Time Calculator -->
         <div class="calculator-container">
-            <h3>Immigration Case Wait Time Calculator</h3>
-            <p>Estimate how long your application might take based on current processing times.</p>
+            <h3 data-i18n="calculator_title">Immigration Case Wait Time Calculator</h3>
+            <p data-i18n="calculator_desc">Estimate how long your application might take based on current processing times.</p>
             
             <div class="calculator-form">
                 <div class="form-group">
-                    <label for="form-type">Form Type:</label>
+                    <label for="form-type" data-i18n="form_type_label">Form Type:</label>
                     <select id="form-type">
-                        <option value="i485">I-485 (Adjustment of Status)</option>
-                        <option value="i130">I-130 (Family Petition)</option>
-                        <option value="i589">I-589 (Asylum)</option>
-                        <option value="i765">I-765 (Work Authorization)</option>
-                        <option value="n400">N-400 (Naturalization)</option>
+                        <option value="i485" data-i18n="form_i485">I-485 (Adjustment of Status)</option>
+                        <option value="i130" data-i18n="form_i130">I-130 (Family Petition)</option>
+                        <option value="i589" data-i18n="form_i589">I-589 (Asylum)</option>
+                        <option value="i765" data-i18n="form_i765">I-765 (Work Authorization)</option>
+                        <option value="n400" data-i18n="form_n400">N-400 (Naturalization)</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
-                    <label for="filing-date">Filing Date:</label>
+                    <label for="filing-date" data-i18n="filing_date_label">Filing Date:</label>
                     <input type="date" id="filing-date" value="2025-06-01">
                 </div>
                 
-                <button class="calculate-btn" id="calculate-btn">Calculate Wait Time</button>
+                <button class="calculate-btn" id="calculate-btn" data-i18n="calculate_btn">Calculate Wait Time</button>
             </div>
             
             <div class="result-box" id="result-box">
-                <div class="result-title">Estimated Processing Time</div>
-                <div id="result-text">Based on current USCIS processing times, your application is estimated to be processed in <strong>9.2 months</strong> from your filing date.</div>
+                <div class="result-title" data-i18n="result_title">Estimated Processing Time</div>
+                <div id="result-text"></div>
             </div>
         </div>
         
@@ -980,9 +1018,9 @@
                     <i class="fas fa-comments"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">Community Support Groups</h3>
-                    <p class="card-description">Join our moderated forums and live chat groups to share experiences and get advice from others.</p>
-                    <a href="https://www.reddit.com/r/immigration/" class="card-btn">Join Now</a>
+                    <h3 class="card-title" data-i18n="community_card1_title">Community Support Groups</h3>
+                    <p class="card-description" data-i18n="community_card1_desc">Join our moderated forums and live chat groups to share experiences and get advice from others.</p>
+                    <a href="https://www.reddit.com/r/immigration/" class="card-btn" data-i18n="community_card1_btn">Join Now</a>
                 </div>
             </div>
             
@@ -992,9 +1030,9 @@
                     <i class="fas fa-heart"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">Mental Health Resources</h3>
-                    <p class="card-description">Access free counseling, stress management tools, and support for families in crisis.</p>
-                    <a href="https://www.immigrationadvocates.org/nonprofit/legaldirectory/" class="card-btn">Find Support</a>
+                    <h3 class="card-title" data-i18n="community_card2_title">Mental Health Resources</h3>
+                    <p class="card-description" data-i18n="community_card2_desc">Access free counseling, stress management tools, and support for families in crisis.</p>
+                    <a href="https://www.immigrationadvocates.org/nonprofit/legaldirectory/" class="card-btn" data-i18n="community_card2_btn">Find Support</a>
                 </div>
             </div>
             
@@ -1004,9 +1042,9 @@
                     <i class="fas fa-newspaper"></i>
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title">Policy Updates & Alerts</h3>
-                    <p class="card-description">Stay informed about immigration policy changes that could affect you and your family.</p>
-                    <a href="https://www.uscis.gov/policy-manual/updates" class="card-btn">Get Updates</a>
+                    <h3 class="card-title" data-i18n="community_card3_title">Policy Updates & Alerts</h3>
+                    <p class="card-description" data-i18n="community_card3_desc">Stay informed about immigration policy changes that could affect you and your family.</p>
+                    <a href="https://www.uscis.gov/policy-manual/updates" class="card-btn" data-i18n="community_card3_btn">Get Updates</a>
                 </div>
             </div>
         </div>
@@ -1017,7 +1055,7 @@
         <div class="footer-grid">
             <div class="footer-column">
                 <h3>ImmigrantShield</h3>
-                <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;" data-i18n="footer_description">
                     Providing critical resources and support for immigrants navigating the U.S. immigration system.
                 </p>
                 <div class="social-links">
@@ -1029,43 +1067,49 @@
             </div>
             
             <div class="footer-column">
-                <h3>Quick Links</h3>
+                <h3 data-i18n="quick_links">Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="#crisis-zone">Crisis Resources</a></li>
-                    <li><a href="#prep-zone">Preparation Tools</a></li>
-                    <li><a href="#community-zone">Community Support</a></li>
-                    <li><a href="https://www.uscis.gov/forms/forms">USCIS Forms</a></li>
-                    <li><a href="https://egov.uscis.gov/processing-times/">Case Processing Times</a></li>
+                    <li><a href="#crisis-zone" data-i18n="footer_crisis">Crisis Resources</a></li>
+                    <li><a href="#prep-zone" data-i18n="footer_prep">Preparation Tools</a></li>
+                    <li><a href="#community-zone" data-i18n="footer_community">Community Support</a></li>
+                    <li><a href="https://www.uscis.gov/forms/forms" data-i18n="footer_forms">USCIS Forms</a></li>
+                    <li><a href="https://egov.uscis.gov/processing-times/" data-i18n="footer_times">Case Processing Times</a></li>
                 </ul>
             </div>
             
             <div class="footer-column">
-                <h3>Legal Resources</h3>
+                <h3 data-i18n="legal_resources">Legal Resources</h3>
                 <ul class="footer-links">
-                    <li><a href="https://www.ilrc.org/community-resources/know-your-rights">Know Your Rights</a></li>
-                    <li><a href="https://www.immigrationadvocates.org/nonprofit/legaldirectory/">Find Legal Help</a></li>
-                    <li><a href="https://www.uscis.gov/humanitarian/refugees-and-asylum/asylum">Asylum Process</a></li>
-                    <li><a href="https://www.ice.gov/detain/detention-management">Detention Centers</a></li>
-                    <li><a href="https://www.uscis.gov/policy-manual">Policy Manual</a></li>
+                    <li><a href="https://www.ilrc.org/community-resources/know-your-rights" data-i18n="footer_rights">Know Your Rights</a></li>
+                    <li><a href="https://www.immigrationadvocates.org/nonprofit/legaldirectory/" data-i18n="footer_help">Find Legal Help</a></li>
+                    <li><a href="https://www.uscis.gov/humanitarian/refugees-and-asylum/asylum" data-i18n="footer_asylum">Asylum Process</a></li>
+                    <li><a href="https://www.ice.gov/detain/detention-management" data-i18n="footer_detention">Detention Centers</a></li>
+                    <li><a href="https://www.uscis.gov/policy-manual" data-i18n="footer_policy">Policy Manual</a></li>
                 </ul>
             </div>
             
             <div class="footer-column">
-                <h3>Support Our Mission</h3>
-                <p style="color: rgba(255,255,255,0.8); margin-bottom: 15px;">
+                <h3 data-i18n="support_us">Support Our Mission</h3>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 15px;" data-i18n="support_desc">
                     Help us continue providing life-saving resources to immigrant communities.
                 </p>
-                <a href="https://mariabarrubia.gumroad.com/l/Immigration" class="card-btn">Rate Our Product</a>
+                <a href="https://mariabarrubia.gumroad.com/l/Immigration" class="card-btn" data-i18n="support_btn">Rate Our Product</a>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <p>Languages: English | Español | 中文 | العربية | हिन्दी | Русский | Português | বাংলা</p>
-            <p>Accessibility: Optimized for screen readers & low-bandwidth | Colorblind-friendly design</p>
-            <p>Data Sources: USCIS, ICE, TRAC, and survivor insights | Updated daily</p>
-            <p style="margin-top: 20px;">&copy; 2025 ImmigrantShield. All rights reserved. This website does not provide legal advice.</p>
+            <p data-i18n="footer_languages">Languages: English | Español | 中文 | العربية | हिन्दी | Русский | Português | বাংলা</p>
+            <p data-i18n="footer_accessibility">Accessibility: Optimized for screen readers & low-bandwidth | Colorblind-friendly design</p>
+            <p data-i18n="footer_sources">Data Sources: USCIS, ICE, TRAC, and survivor insights | Updated daily</p>
+            <p style="margin-top: 20px;" data-i18n="footer_copyright">&copy; 2025 ImmigrantShield. All rights reserved. This website does not provide legal advice.</p>
         </div>
     </footer>
+    
+    <!-- Language Notification -->
+    <div class="language-notification" id="language-notification">
+        <div class="flag" id="notification-flag"></div>
+        <span id="notification-text">Language switched to Español</span>
+    </div>
     
     <!-- Review Popup -->
     <div class="review-popup" id="review-popup">
@@ -1073,13 +1117,309 @@
             <button class="close-popup" id="close-popup">
                 <i class="fas fa-times"></i>
             </button>
-            <h3>Help Us Improve!</h3>
-            <p>If you found our resources helpful, please take a moment to rate our product. Your feedback helps us continue this important work.</p>
-            <a href="https://mariabarrubia.gumroad.com/l/Immigration" class="review-btn">Rate Our Product</a>
+            <h3 data-i18n="review_title">Help Us Improve!</h3>
+            <p data-i18n="review_desc">If you found our resources helpful, please take a moment to rate our product. Your feedback helps us continue this important work.</p>
+            <a href="https://mariabarrubia.gumroad.com/l/Immigration" class="review-btn" data-i18n="review_btn">Rate Our Product</a>
         </div>
     </div>
     
     <script>
+        // Language Translations
+        const translations = {
+            en: {
+                // Accessibility
+                "high_contrast": "High Contrast",
+                "increase_font": "Increase Font",
+                "reduce_motion": "Reduce Motion",
+                "search_placeholder": "Find critical resources...",
+                
+                // Hero Section
+                "hero_title": "Face Immigration Law Enforcement with Confidence",
+                "hero_subtitle": "Immediate Survival Tools for Critical Situations",
+                "hero_description": "Free, actionable resources available in multiple languages to protect you and your family. Know your rights, prepare for emergencies, and access legal support.",
+                "hero_cta": "Access Critical Resources Now",
+                
+                // Crisis Zone
+                "crisis_title": "Crisis Zone: Immediate Actions",
+                "crisis_subtitle": "Time is critical. These tools are simple, practical, and designed to protect you right now. Available on any device, anywhere.",
+                "card1_title": "Know Your Rights Card",
+                "card1_desc": "Printable & mobile-friendly wallet-sized guide with exact phrases to use during ICE encounters. Available in 10+ languages.",
+                "card1_btn": "Download Now",
+                "card2_title": "ICE Raid Survival Kit",
+                "card2_desc": "5-minute checklist: secure documents, assign emergency contacts, prepare a go-bag. Includes raid hotspot map.",
+                "card2_btn": "Get the Kit",
+                "card3_title": "Legal Aid Finder",
+                "card3_desc": "Enter your ZIP code for free or low-cost immigration lawyers near you. Updated weekly with availability.",
+                "card3_btn": "Find Help",
+                "card4_title": "Emergency Hotline Directory",
+                "card4_desc": "Nationwide numbers for legal aid, mental health support, and family reunification. Save these immediately.",
+                "card4_btn": "See the List",
+                
+                // Preparation Zone
+                "prep_title": "Preparation Zone: Build Your Safety Plan",
+                "prep_subtitle": "Proactive tools to prepare for potential challenges. Knowledge is your best protection.",
+                "prep_card1_title": "Essential USCIS Forms",
+                "prep_card1_desc": "Access the latest USCIS forms including I-589 (Asylum), I-765 (Work Authorization), I-130 (Family Petitions).",
+                "prep_card1_btn": "View All Forms",
+                "prep_card2_title": "Document Safety System",
+                "prep_card2_desc": "Create digital backups of essential documents and learn secure storage methods. Available in multiple languages.",
+                "prep_card2_btn": "Secure Documents",
+                "prep_card3_title": "Legal Guides & Resources",
+                "prep_card3_desc": "Comprehensive guides to your rights in different immigration situations. Downloadable in 7 languages.",
+                "prep_card3_btn": "Access Resources",
+                "prep_card4_title": "Templates & Checklists",
+                "prep_card4_desc": "Ready-to-use templates for FOIA requests, asylum statements, and family safety plans.",
+                "prep_card4_btn": "Get Templates",
+                "processing_title": "USCIS Processing Times (2025)",
+                "processing_desc": "Current processing times for key immigration forms:",
+                
+                // Community Zone
+                "community_title": "Community Zone: Support & Connection",
+                "community_subtitle": "You're not alone. Connect with others, access mental health resources, and join our supportive community.",
+                "stat1": "ICE Arrests in 2024",
+                "stat2": "Asylum Denial Rate",
+                "stat3": "Pending Immigration Cases",
+                "asylum_title": "Asylum Approval Rates by Country (2024)",
+                "asylum_desc": "Success rates vary significantly based on country of origin:",
+                "calculator_title": "Immigration Case Wait Time Calculator",
+                "calculator_desc": "Estimate how long your application might take based on current processing times.",
+                "form_type_label": "Form Type:",
+                "form_i485": "I-485 (Adjustment of Status)",
+                "form_i130": "I-130 (Family Petition)",
+                "form_i589": "I-589 (Asylum)",
+                "form_i765": "I-765 (Work Authorization)",
+                "form_n400": "N-400 (Naturalization)",
+                "filing_date_label": "Filing Date:",
+                "calculate_btn": "Calculate Wait Time",
+                "result_title": "Estimated Processing Time",
+                "community_card1_title": "Community Support Groups",
+                "community_card1_desc": "Join our moderated forums and live chat groups to share experiences and get advice from others.",
+                "community_card1_btn": "Join Now",
+                "community_card2_title": "Mental Health Resources",
+                "community_card2_desc": "Access free counseling, stress management tools, and support for families in crisis.",
+                "community_card2_btn": "Find Support",
+                "community_card3_title": "Policy Updates & Alerts",
+                "community_card3_desc": "Stay informed about immigration policy changes that could affect you and your family.",
+                "community_card3_btn": "Get Updates",
+                
+                // Footer
+                "footer_description": "Providing critical resources and support for immigrants navigating the U.S. immigration system.",
+                "quick_links": "Quick Links",
+                "footer_crisis": "Crisis Resources",
+                "footer_prep": "Preparation Tools",
+                "footer_community": "Community Support",
+                "footer_forms": "USCIS Forms",
+                "footer_times": "Case Processing Times",
+                "legal_resources": "Legal Resources",
+                "footer_rights": "Know Your Rights",
+                "footer_help": "Find Legal Help",
+                "footer_asylum": "Asylum Process",
+                "footer_detention": "Detention Centers",
+                "footer_policy": "Policy Manual",
+                "support_us": "Support Our Mission",
+                "support_desc": "Help us continue providing life-saving resources to immigrant communities.",
+                "support_btn": "Rate Our Product",
+                "footer_languages": "Languages: English | Español | 中文 | العربية | हिन्दी | Русский | Português | বাংলা",
+                "footer_accessibility": "Accessibility: Optimized for screen readers & low-bandwidth | Colorblind-friendly design",
+                "footer_sources": "Data Sources: USCIS, ICE, TRAC, and survivor insights | Updated daily",
+                "footer_copyright": "&copy; 2025 ImmigrantShield. All rights reserved. This website does not provide legal advice.",
+                
+                // Review Popup
+                "review_title": "Help Us Improve!",
+                "review_desc": "If you found our resources helpful, please take a moment to rate our product. Your feedback helps us continue this important work.",
+                "review_btn": "Rate Our Product"
+            },
+            es: {
+                // Accessibility
+                "high_contrast": "Alto Contraste",
+                "increase_font": "Aumentar Fuente",
+                "reduce_motion": "Reducir Animaciones",
+                "search_placeholder": "Buscar recursos críticos...",
+                
+                // Hero Section
+                "hero_title": "Enfrente la Aplicación de la Ley de Inmigración con Confianza",
+                "hero_subtitle": "Herramientas de Supervivencia Inmediata para Situaciones Críticas",
+                "hero_description": "Recursos gratuitos y prácticos disponibles en varios idiomas para protegerle a usted y a su familia. Conozca sus derechos, prepárese para emergencias y acceda a apoyo legal.",
+                "hero_cta": "Acceda a Recursos Críticos Ahora",
+                
+                // Crisis Zone
+                "crisis_title": "Zona de Crisis: Acciones Inmediatas",
+                "crisis_subtitle": "El tiempo es crítico. Estas herramientas son simples, prácticas y están diseñadas para protegerle ahora mismo. Disponibles en cualquier dispositivo, en cualquier lugar.",
+                "card1_title": "Tarjeta Conozca Sus Derechos",
+                "card1_desc": "Guía imprimible y compatible con dispositivos móviles con frases exactas para usar durante encuentros con ICE. Disponible en más de 10 idiomas.",
+                "card1_btn": "Descargar Ahora",
+                "card2_title": "Kit de Supervivencia para Redadas de ICE",
+                "card2_desc": "Lista de verificación de 5 minutos: asegure documentos, asigne contactos de emergencia, prepare una bolsa de viaje. Incluye mapa de puntos calientes de redadas.",
+                "card2_btn": "Obtener el Kit",
+                "card3_title": "Buscador de Ayuda Legal",
+                "card3_desc": "Ingrese su código postal para encontrar abogados de inmigración gratuitos o de bajo costo cerca de usted. Actualizado semanalmente con disponibilidad.",
+                "card3_btn": "Encontrar Ayuda",
+                "card4_title": "Directorio de Líneas de Emergencia",
+                "card4_desc": "Números nacionales para ayuda legal, apoyo de salud mental y reunificación familiar. Guarde estos números inmediatamente.",
+                "card4_btn": "Ver la Lista",
+                
+                // Preparation Zone
+                "prep_title": "Zona de Preparación: Construya Su Plan de Seguridad",
+                "prep_subtitle": "Herramientas proactivas para prepararse para desafíos potenciales. El conocimiento es su mejor protección.",
+                "prep_card1_title": "Formularios Esenciales de USCIS",
+                "prep_card1_desc": "Acceda a los últimos formularios de USCIS, incluidos I-589 (Asilo), I-765 (Autorización de Trabajo), I-130 (Peticiones Familiares).",
+                "prep_card1_btn": "Ver Todos los Formularios",
+                "prep_card2_title": "Sistema de Seguridad de Documentos",
+                "prep_card2_desc": "Cree copias de seguridad digitales de documentos esenciales y aprenda métodos de almacenamiento seguros. Disponible en varios idiomas.",
+                "prep_card2_btn": "Proteger Documentos",
+                "prep_card3_title": "Guías y Recursos Legales",
+                "prep_card3_desc": "Guías completas sobre sus derechos en diferentes situaciones de inmigración. Descargables en 7 idiomas.",
+                "prep_card3_btn": "Acceder a Recursos",
+                "prep_card4_title": "Plantillas y Listas de Verificación",
+                "prep_card4_desc": "Plantillas listas para usar para solicitudes FOIA, declaraciones de asilo y planes de seguridad familiar.",
+                "prep_card4_btn": "Obtener Plantillas",
+                "processing_title": "Tiempos de Procesamiento de USCIS (2025)",
+                "processing_desc": "Tiempos de procesamiento actuales para formularios clave de inmigración:",
+                
+                // Community Zone
+                "community_title": "Zona Comunitaria: Apoyo y Conexión",
+                "community_subtitle": "No estás solo. Conéctate con otros, accede a recursos de salud mental y únete a nuestra comunidad de apoyo.",
+                "stat1": "Arrestos de ICE en 2024",
+                "stat2": "Tasa de Denegación de Asilo",
+                "stat3": "Casos de Inmigración Pendientes",
+                "asylum_title": "Tasas de Aprobación de Asilo por País (2024)",
+                "asylum_desc": "Las tasas de éxito varían significativamente según el país de origen:",
+                "calculator_title": "Calculadora de Tiempo de Espera para Casos de Inmigración",
+                "calculator_desc": "Estime cuánto tiempo podría tomar su solicitud según los tiempos de procesamiento actuales.",
+                "form_type_label": "Tipo de Formulario:",
+                "form_i485": "I-485 (Ajuste de Estatus)",
+                "form_i130": "I-130 (Petición Familiar)",
+                "form_i589": "I-589 (Asilo)",
+                "form_i765": "I-765 (Autorización de Trabajo)",
+                "form_n400": "N-400 (Naturalización)",
+                "filing_date_label": "Fecha de Presentación:",
+                "calculate_btn": "Calcular Tiempo de Espera",
+                "result_title": "Tiempo de Procesamiento Estimado",
+                "community_card1_title": "Grupos de Apoyo Comunitario",
+                "community_card1_desc": "Únase a nuestros foros moderados y grupos de chat en vivo para compartir experiencias y obtener consejos de otros.",
+                "community_card1_btn": "Únete Ahora",
+                "community_card2_title": "Recursos de Salud Mental",
+                "community_card2_desc": "Acceda a asesoramiento gratuito, herramientas de manejo del estrés y apoyo para familias en crisis.",
+                "community_card2_btn": "Encontrar Apoyo",
+                "community_card3_title": "Actualizaciones y Alertas de Políticas",
+                "community_card3_desc": "Manténgase informado sobre cambios en políticas de inmigración que podrían afectarle a usted y a su familia.",
+                "community_card3_btn": "Recibir Actualizaciones",
+                
+                // Footer
+                "footer_description": "Proporcionando recursos críticos y apoyo para inmigrantes que navegan por el sistema de inmigración de EE. UU.",
+                "quick_links": "Enlaces Rápidos",
+                "footer_crisis": "Recursos de Crisis",
+                "footer_prep": "Herramientas de Preparación",
+                "footer_community": "Apoyo Comunitario",
+                "footer_forms": "Formularios USCIS",
+                "footer_times": "Tiempos de Procesamiento",
+                "legal_resources": "Recursos Legales",
+                "footer_rights": "Conozca Sus Derechos",
+                "footer_help": "Encontrar Ayuda Legal",
+                "footer_asylum": "Proceso de Asilo",
+                "footer_detention": "Centros de Detención",
+                "footer_policy": "Manual de Políticas",
+                "support_us": "Apoye Nuestra Misión",
+                "support_desc": "Ayúdenos a continuar proporcionando recursos que salvan vidas a las comunidades de inmigrantes.",
+                "support_btn": "Califique Nuestro Producto",
+                "footer_languages": "Idiomas: Inglés | Español | 中文 | العربية | हिन्दी | Русский | Portugués | বাংলা",
+                "footer_accessibility": "Accesibilidad: Optimizado para lectores de pantalla y bajo ancho de banda | Diseño apto para daltónicos",
+                "footer_sources": "Fuentes de Datos: USCIS, ICE, TRAC y testimonios de sobrevivientes | Actualizado diariamente",
+                "footer_copyright": "&copy; 2025 ImmigrantShield. Todos los derechos reservados. Este sitio web no proporciona asesoramiento legal.",
+                
+                // Review Popup
+                "review_title": "¡Ayúdenos a Mejorar!",
+                "review_desc": "Si encontró útiles nuestros recursos, tómese un momento para calificar nuestro producto. Sus comentarios nos ayudan a continuar este importante trabajo.",
+                "review_btn": "Califique Nuestro Producto"
+            },
+            // Other languages would follow the same pattern
+            zh: {},
+            ar: {},
+            hi: {},
+            ru: {},
+            pt: {},
+            bn: {}
+        };
+
+        // Language names for display
+        const languageNames = {
+            en: "English",
+            es: "Español",
+            zh: "中文 (Mandarin)",
+            ar: "العربية (Arabic)",
+            hi: "हिन्दी (Hindi)",
+            ru: "Русский (Russian)",
+            pt: "Português (Portuguese)",
+            bn: "বাংলা (Bengali)"
+        };
+
+        // Flag colors for notification
+        const flagColors = {
+            en: "linear-gradient(to bottom, #b22234, #3c3b6e)",
+            es: "linear-gradient(to right, #aa151b 25%, #f1bf00 25%, #f1bf00 75%, #aa151b 75%)",
+            zh: "#de2910",
+            ar: "linear-gradient(to bottom, #ce1126, #000, #fff, #007a3d)",
+            hi: "#ff9933",
+            ru: "linear-gradient(to bottom, #fff, #0039a6, #d52b1e)",
+            pt: "linear-gradient(to bottom, #009c3b, #ffdf00, #002776)",
+            bn: "linear-gradient(to bottom, #006a4e, #f42a41)"
+        };
+
+        // Current language
+        let currentLang = 'en';
+
+        // Function to translate the page
+        function translatePage(lang) {
+            // Update all translatable elements
+            document.querySelectorAll('[data-i18n]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    elem.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    elem.placeholder = translations[lang][key];
+                }
+            });
+            
+            // Update select options
+            document.querySelectorAll('option[data-i18n]').forEach(option => {
+                const key = option.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    option.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update current language display
+            document.getElementById('current-lang').textContent = languageNames[lang];
+            document.documentElement.lang = lang;
+            currentLang = lang;
+            
+            // Show language notification
+            showLanguageNotification(lang);
+        }
+
+        // Show language notification
+        function showLanguageNotification(lang) {
+            const notification = document.getElementById('language-notification');
+            const flag = document.getElementById('notification-flag');
+            const text = document.getElementById('notification-text');
+            
+            flag.style.background = flagColors[lang];
+            text.textContent = `${translations[currentLang]['language_switched'] || 'Language switched to'} ${languageNames[lang]}`;
+            
+            notification.classList.add('show');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
         // Language Switcher
         const languageBtn = document.querySelector('.language-btn');
         const languageDropdown = document.getElementById('language-dropdown');
@@ -1100,15 +1440,8 @@
         languageOptions.forEach(option => {
             option.addEventListener('click', () => {
                 const lang = option.getAttribute('data-lang');
-                // In a real implementation, this would load the JSON for the selected language
-                // For this demo, we'll just update the button text
-                languageBtn.innerHTML = `
-                    <i class="fas fa-globe"></i>
-                    ${option.textContent}
-                    <i class="fas fa-chevron-down"></i>
-                `;
+                translatePage(lang);
                 languageDropdown.classList.remove('show');
-                alert(`Language switched to ${option.textContent}. In a full implementation, all content would now display in this language.`);
             });
         });
         
@@ -1247,14 +1580,19 @@
             
             // Format dates
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const formattedFilingDate = filingDate.toLocaleDateString('en-US', options);
-            const formattedCompletionDate = completionDate.toLocaleDateString('en-US', options);
+            const formattedFilingDate = filingDate.toLocaleDateString(currentLang, options);
+            const formattedCompletionDate = completionDate.toLocaleDateString(currentLang, options);
+            
+            // Get localized text
+            const basedText = translations[currentLang]?.result_based || 'Based on current USCIS processing times, your application is estimated to be processed in';
+            const filingText = translations[currentLang]?.result_filing || 'Filing Date';
+            const completionText = translations[currentLang]?.result_completion || 'Estimated Completion';
             
             resultText.innerHTML = `
-                Based on current USCIS processing times, your application is estimated to be processed in <strong>${months} months</strong>.
+                ${basedText} <strong>${months} ${translations[currentLang]?.months || 'months'}</strong>.
                 <br><br>
-                <strong>Filing Date:</strong> ${formattedFilingDate}<br>
-                <strong>Estimated Completion:</strong> ${formattedCompletionDate}
+                <strong>${filingText}:</strong> ${formattedFilingDate}<br>
+                <strong>${completionText}:</strong> ${formattedCompletionDate}
             `;
             
             resultBox.style.display = 'block';
@@ -1270,6 +1608,9 @@
         setTimeout(() => {
             document.getElementById('review-popup').classList.add('show');
         }, 420000); // 7 minutes in milliseconds
+        
+        // Initialize the page with English translations
+        translatePage('en');
     </script>
 </body>
-      </html>
+    </html>
